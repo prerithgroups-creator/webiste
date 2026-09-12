@@ -1,4 +1,5 @@
-import { Calendar, CircleCheckBig, Clock, MapPin, Ruler } from "lucide-react";
+import { Calendar, CheckCircle2, Clock, MapPin, Ruler } from "lucide-react";
+import { cn } from "cn";
 import type { Project } from "@/lib/types";
 import { getProjectDuration } from "@/lib/utils";
 
@@ -27,7 +28,7 @@ export function ProjectFactsBar({ project }: ProjectFactsBarProps) {
           },
         ]
       : []),
-    { icon: CircleCheckBig, label: "Status", value: project.status },
+    { icon: CheckCircle2, label: "Status", value: project.status },
   ];
 
   return (
@@ -46,9 +47,23 @@ export function ProjectFactsBar({ project }: ProjectFactsBarProps) {
         ))}
       </div>
 
-      <div className="flex shrink-0 items-center gap-3 rounded-xl bg-accent/10 px-5 py-3">
-        <Clock className="size-5 text-accent" />
-        <p className="text-sm font-semibold whitespace-nowrap text-accent">
+      <div
+        className={cn(
+          "flex shrink-0 items-center gap-3 rounded-xl px-5 py-3",
+          isOngoing ? "bg-accent/10" : "bg-emerald-600/10"
+        )}
+      >
+        {isOngoing ? (
+          <Clock className="size-5 text-accent" />
+        ) : (
+          <CheckCircle2 className="size-5 text-emerald-700" />
+        )}
+        <p
+          className={cn(
+            "text-sm font-semibold whitespace-nowrap",
+            isOngoing ? "text-accent" : "text-emerald-700"
+          )}
+        >
           {isOngoing
             ? `${project.progressPercent ?? 0}% complete`
             : `Completed in ${days} days`}

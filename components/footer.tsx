@@ -35,8 +35,8 @@ export function Footer() {
         <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-3">
           {/* Company blurb */}
           <div className="max-w-sm">
-            <span className="inline-flex items-center rounded-xl bg-white/95 px-3 py-1.5">
-              <Image src="/logo.png" alt="Prerith Groups" width={160} height={48} className="h-9 w-auto" />
+            <span className="flex items-center">
+              <Image src="/logo-white.png" alt="Prerith Groups" width={160} height={48} className="h-9 w-auto" />
             </span>
             <p className="mt-4 text-sm leading-6 text-primary-foreground/70">
               Prerith Groups delivers landmark commercial, residential, and

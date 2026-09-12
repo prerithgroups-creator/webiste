@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { animate, useInView } from "framer-motion";
-import { Building2, HardHat, KeyRound, PaintRoller } from "lucide-react";
+import { Building2, CheckCircle2, HardHat, KeyRound, PaintRoller } from "lucide-react";
 import { cn } from "cn";
 
 const STAGES = [
@@ -104,12 +104,18 @@ export function CompletionTimeline({
 
         <div>
           <div className="flex items-center justify-between text-sm font-medium text-foreground">
-            <span>{isOngoing ? "In progress" : "Completed"}</span>
+            <span className={cn(!isOngoing && "flex items-center gap-1.5 text-emerald-700")}>
+              {!isOngoing && <CheckCircle2 className="size-4" />}
+              {isOngoing ? "In progress" : "Completed"}
+            </span>
             <span className="tabular-nums">{progressPercent}%</span>
           </div>
           <div className="mt-2 h-3 w-full overflow-hidden rounded-full bg-muted">
             <div
-              className="h-full rounded-full bg-accent transition-[width] duration-[1400ms] ease-out"
+              className={cn(
+                "h-full rounded-full transition-[width] duration-[1400ms] ease-out",
+                isOngoing ? "bg-accent" : "bg-emerald-600"
+              )}
               style={{ width: isInView ? `${progressPercent}%` : "0%", transitionDelay: "300ms" }}
             />
           </div>

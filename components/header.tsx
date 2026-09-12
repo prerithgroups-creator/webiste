@@ -82,9 +82,9 @@ export function Header() {
       >
         <Container>
           <div className="flex h-20 items-center justify-between">
-            <Link href="/" className="flex items-center rounded-xl bg-white/95 px-3 py-1.5 shadow-sm">
+            <Link href="/" className="flex items-center">
               <Image
-                src="/logo.png"
+                src="/logo-white.png"
                 alt="Prerith Groups"
                 width={160}
                 height={48}
@@ -178,8 +178,8 @@ export function Header() {
               aria-label="Site navigation"
             >
               <div className="flex items-center justify-between">
-                <span className="flex items-center rounded-xl bg-white/95 px-3 py-1.5">
-                  <Image src="/logo.png" alt="Prerith Groups" width={140} height={42} className="h-8 w-auto" />
+                <span className="flex items-center">
+                  <Image src="/logo-white.png" alt="Prerith Groups" width={140} height={42} className="h-8 w-auto" />
                 </span>
                 <button
                   type="button"

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Clock, Loader2, MapPin } from "lucide-react";
+import { CheckCircle2, Loader2, MapPin } from "lucide-react";
 import { cn } from "cn";
 import { Badge } from "@/components/ui/badge";
 import { IKImage } from "@/components/ik-image";
@@ -42,10 +42,12 @@ export function PortfolioProjectCard({ project }: PortfolioProjectCardProps) {
         <Badge
           className={cn(
             "absolute left-3 top-3 gap-1",
-            isOngoing ? "bg-primary text-primary-foreground" : "bg-accent text-accent-foreground"
+            isOngoing
+              ? "bg-accent text-accent-foreground"
+              : "bg-white/95 text-emerald-700 ring-1 ring-emerald-600/15"
           )}
         >
-          {isOngoing ? <Loader2 className="size-3" /> : <Clock className="size-3" />}
+          {isOngoing ? <Loader2 className="size-3 animate-spin" /> : <CheckCircle2 className="size-3" />}
           {durationLabel}
         </Badge>
         <Badge variant="secondary" className="absolute right-3 top-3">

@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Clock, Loader2 } from "lucide-react";
+import { CheckCircle2, Loader2 } from "lucide-react";
+import { cn } from "cn";
 import { IKImage } from "@/components/ik-image";
 import {
   Card,
@@ -53,8 +54,15 @@ export function ProjectPreviewCard({ project, index = 0 }: ProjectPreviewCardPro
             sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
             className="object-cover"
           />
-          <Badge className="absolute left-3 top-3 gap-1 bg-accent text-accent-foreground">
-            {isOngoing ? <Loader2 className="size-3" /> : <Clock className="size-3" />}
+          <Badge
+            className={cn(
+              "absolute left-3 top-3 gap-1",
+              isOngoing
+                ? "bg-accent text-accent-foreground"
+                : "bg-white/95 text-emerald-700 ring-1 ring-emerald-600/15"
+            )}
+          >
+            {isOngoing ? <Loader2 className="size-3 animate-spin" /> : <CheckCircle2 className="size-3" />}
             {badgeLabel}
           </Badge>
         </div>
