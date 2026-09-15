@@ -3,6 +3,7 @@
 import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   AnimatePresence,
   motion,
@@ -18,12 +19,13 @@ import { NAV_LINKS } from "@/lib/nav-links";
 const SCROLL_THRESHOLD = 24;
 
 /**
- * Sticky site header. Transparent (text in white) while at the top of a
- * hero section, and animates to a solid navy bar with a soft shadow once the
+ * Sticky site header: white background, charcoal nav text, and an orange
+ * underline indicator on the active route. Gains a soft shadow once the
  * page scrolls past `SCROLL_THRESHOLD`. On small screens the nav collapses
  * into an animated slide-in drawer.
  */
 export function Header() {
+  const pathname = usePathname();
   const [isScrolled, setIsScrolled] = React.useState(false);
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const { scrollY } = useScroll();
@@ -60,31 +62,21 @@ export function Header() {
 
   return (
     <>
-      {/*
-        Positioned `fixed` (not `sticky`) so it overlays the hero completely
-        transparent, then fades to a solid navy bar with a shadow once the
-        page scrolls past SCROLL_THRESHOLD. Pages/sections that don't start
-        with a full-bleed hero should add top padding (>= h-20, i.e. 80px) to
-        their first section so content isn't hidden underneath the header.
-      */}
       <motion.header
         initial={false}
         animate={{
-          backgroundColor: isScrolled
-            ? "rgba(31, 58, 95, 0.98)"
-            : "rgba(31, 58, 95, 0)",
           boxShadow: isScrolled
-            ? "0 10px 30px -12px rgba(15, 27, 46, 0.45)"
-            : "0 0 0 rgba(15, 27, 46, 0)",
+            ? "0 8px 24px -12px rgba(31, 41, 55, 0.18)"
+            : "0 0 0 rgba(31, 41, 55, 0)",
         }}
         transition={{ duration: 0.3, ease: "easeOut" }}
-        className="fixed inset-x-0 top-0 z-50 backdrop-blur-sm"
+        className="fixed inset-x-0 top-0 z-50 border-b border-border bg-white"
       >
         <Container>
           <div className="flex h-20 items-center justify-between">
             <Link href="/" className="flex items-center">
               <Image
-                src="/logo-white.png"
+                src="/logo.png"
                 alt="Prerith Groups"
                 width={160}
                 height={48}
@@ -94,22 +86,32 @@ export function Header() {
             </Link>
 
             <nav className="hidden items-center gap-8 lg:flex">
-              {NAV_LINKS.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="text-sm font-medium text-white/85 transition-colors hover:text-white"
-                >
-                  {link.label}
-                </Link>
-              ))}
+              {NAV_LINKS.map((link) => {
+                const isActive =
+                  link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={cn(
+                      "relative py-1 text-sm font-medium transition-colors",
+                      isActive ? "text-accent" : "text-foreground/80 hover:text-foreground"
+                    )}
+                  >
+                    {link.label}
+                    {isActive ? (
+                      <span className="absolute -bottom-1 left-0 h-0.5 w-full rounded-full bg-accent" />
+                    ) : null}
+                  </Link>
+                );
+              })}
             </nav>
 
             <div className="hidden lg:block">
               <Button
                 render={<Link href="/contact" />}
                 nativeButton={false}
-                className="rounded-xl bg-accent text-accent-foreground hover:bg-accent/90"
+                className="rounded-xl bg-accent text-accent-foreground shadow-sm hover:bg-accent/90"
               >
                 Get a Quote
               </Button>
@@ -120,7 +122,7 @@ export function Header() {
               aria-label={isMenuOpen ? "Close menu" : "Open menu"}
               aria-expanded={isMenuOpen}
               onClick={() => setIsMenuOpen((open) => !open)}
-              className="relative inline-flex size-10 items-center justify-center rounded-lg text-white transition-colors hover:bg-white/10 lg:hidden"
+              className="relative inline-flex size-10 items-center justify-center rounded-lg text-foreground transition-colors hover:bg-secondary lg:hidden"
             >
               <AnimatePresence initial={false} mode="wait">
                 {isMenuOpen ? (
@@ -162,7 +164,7 @@ export function Header() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.25 }}
-              className="fixed inset-0 z-50 bg-black/50 lg:hidden"
+              className="fixed inset-0 z-50 bg-foreground/50 lg:hidden"
               onClick={() => setIsMenuOpen(false)}
               aria-hidden="true"
             />
@@ -172,36 +174,45 @@ export function Header() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ duration: 0.35, ease: "easeInOut" }}
-              className="fixed inset-y-0 right-0 z-50 flex w-72 max-w-[85vw] flex-col gap-8 bg-primary p-6 shadow-2xl lg:hidden"
+              className="fixed inset-y-0 right-0 z-50 flex w-72 max-w-[85vw] flex-col gap-8 bg-white p-6 shadow-2xl lg:hidden"
               role="dialog"
               aria-modal="true"
               aria-label="Site navigation"
             >
               <div className="flex items-center justify-between">
                 <span className="flex items-center">
-                  <Image src="/logo-white.png" alt="Prerith Groups" width={140} height={42} className="h-8 w-auto" />
+                  <Image src="/logo.png" alt="Prerith Groups" width={140} height={42} className="h-8 w-auto" />
                 </span>
                 <button
                   type="button"
                   aria-label="Close menu"
                   onClick={() => setIsMenuOpen(false)}
-                  className="inline-flex size-10 items-center justify-center rounded-lg text-white transition-colors hover:bg-white/10"
+                  className="inline-flex size-10 items-center justify-center rounded-lg text-foreground transition-colors hover:bg-secondary"
                 >
                   <X className="size-6" />
                 </button>
               </div>
 
               <nav className="flex flex-col gap-1">
-                {NAV_LINKS.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    onClick={() => setIsMenuOpen(false)}
-                    className="rounded-lg px-3 py-3 text-base font-medium text-white/85 transition-colors hover:bg-white/10 hover:text-white"
-                  >
-                    {link.label}
-                  </Link>
-                ))}
+                {NAV_LINKS.map((link) => {
+                  const isActive =
+                    link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);
+                  return (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      onClick={() => setIsMenuOpen(false)}
+                      className={cn(
+                        "rounded-lg px-3 py-3 text-base font-medium transition-colors",
+                        isActive
+                          ? "bg-accent/10 text-accent"
+                          : "text-foreground/80 hover:bg-secondary hover:text-foreground"
+                      )}
+                    >
+                      {link.label}
+                    </Link>
+                  );
+                })}
               </nav>
 
               <Link
@@ -221,3 +232,4 @@ export function Header() {
     </>
   );
 }
+
