@@ -4,7 +4,6 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { HeroConstructionGraphic } from "@/components/hero-construction-graphic";
 import { IKImage } from "@/components/ik-image";
 import { ProjectPreviewCard } from "@/components/project-preview-card";
 import { getProjects } from "@/lib/sanity";
@@ -59,41 +58,10 @@ export default async function Home() {
             </div>
           </div>
 
-          {/* Right: abstract architectural/crane illustration, fading in from behind the branding */}
-          <div className="hidden lg:block">
-            <HeroConstructionGraphic />
-          </div>
-        </Container>
-      </section>
-
-      {/* ---------------------------------------------------------------- */}
-      {/* Residential projects banner                                       */}
-      {/* ---------------------------------------------------------------- */}
-      <section className="bg-white px-6 py-16 sm:py-20">
-        <Container className="grid items-center gap-10 lg:grid-cols-2 lg:gap-8">
-          {/* Text: stacks above the image on mobile via DOM order + grid-cols-1 */}
-          <div className="flex flex-col items-center gap-5 text-center lg:items-start lg:text-left">
-            <h2 className="font-heading text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-              <span className="text-accent">Residential</span> Projects
-            </h2>
-            <p className="max-w-md text-base text-muted-foreground sm:text-lg">
-              Thoughtfully designed apartments and gated communities built
-              for comfortable living — from foundation to finishing, with
-              premium landscaping and lasting quality.
-            </p>
-            <Button
-              size="lg"
-              className="rounded-2xl bg-accent text-accent-foreground shadow-sm hover:bg-accent/90"
-              render={<Link href="/portfolio" />}
-              nativeButton={false}
-            >
-              View Projects
-            </Button>
-          </div>
-
-          {/* Image: already fades to white on its left edge, so it blends
-              seamlessly into this section's white background with no visible
-              border. */}
+          {/* Right: real residential photo, already fades to white on its
+              left edge so it blends seamlessly into the hero's white
+              background with no visible border. Stacks below the text on
+              mobile. */}
           <div className="relative aspect-[3/2] w-full lg:aspect-[16/11]">
             <IKImage
               src="/Designer.png"
