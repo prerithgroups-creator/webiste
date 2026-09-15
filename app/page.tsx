@@ -1,5 +1,4 @@
 import { Timer } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
@@ -14,25 +13,31 @@ export default async function Home() {
   return (
     <div className="flex flex-1 flex-col">
       {/* ---------------------------------------------------------------- */}
-      {/* Hero                                                              */}
+      {/* Hero — full-bleed photo background with copy overlaid on top      */}
       {/* ---------------------------------------------------------------- */}
-      <section className="relative overflow-hidden bg-white px-6 py-16 sm:py-20 lg:py-24">
-        <Container className="grid items-center gap-12 lg:grid-cols-2 lg:gap-8">
-          {/* Left: brand + copy + CTAs */}
-          <div className="flex flex-col items-center gap-5 text-center lg:items-start lg:text-left">
-            <Image
-              src="/logo.png"
-              alt="Prerith Groups"
-              width={200}
-              height={60}
-              priority
-              className="h-12 w-auto sm:h-14"
-            />
-            <h1 className="max-w-xl font-heading text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+      <section className="relative isolate overflow-hidden bg-white">
+        {/* Background photo, covers the entire section */}
+        <div className="absolute inset-0 -z-20">
+          <IKImage
+            src="/Designer.png"
+            alt="Modern residential apartments in the city"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+          />
+        </div>
+        {/* Scrim so the text stays readable over the photo, still letting
+            the image's own left-edge fade show through */}
+        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-white via-white/85 to-white/20" />
+
+        <Container className="relative px-6 py-24 sm:py-32 lg:py-40">
+          <div className="flex max-w-xl flex-col items-center gap-5 text-center lg:items-start lg:text-left">
+            <h1 className="font-heading text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
               Building <span className="text-accent">landmarks</span>, on
               time, every time.
             </h1>
-            <p className="max-w-lg text-base text-muted-foreground sm:text-lg">
+            <p className="text-base text-muted-foreground sm:text-lg">
               Prerith Groups delivers landmark commercial, residential, and
               renovation projects across India — engineered for precision and
               delivered on schedule, every time.
@@ -56,21 +61,6 @@ export default async function Home() {
                 Our Projects
               </Button>
             </div>
-          </div>
-
-          {/* Right: real residential photo, already fades to white on its
-              left edge so it blends seamlessly into the hero's white
-              background with no visible border. Stacks below the text on
-              mobile. */}
-          <div className="relative aspect-[3/2] w-full lg:aspect-[16/11]">
-            <IKImage
-              src="/Designer.png"
-              alt="Modern residential apartments in the city"
-              fill
-              loading="lazy"
-              sizes="(min-width: 1024px) 50vw, 100vw"
-              className="object-contain object-right"
-            />
           </div>
         </Container>
       </section>
