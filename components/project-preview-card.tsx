@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { CheckCircle2, Loader2 } from "lucide-react";
 import { cn } from "cn";
 import { IKImage } from "@/components/ik-image";
@@ -45,6 +46,7 @@ export function ProjectPreviewCard({ project, index = 0 }: ProjectPreviewCardPro
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
     >
+      <Link href={`/portfolio/${project.slug}`} className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 rounded-2xl">
       <Card className="rounded-2xl border-none shadow-md shadow-primary/5 ring-1 ring-border transition-shadow hover:shadow-lg hover:shadow-primary/10">
         <div className="relative aspect-[4/3] w-full overflow-hidden rounded-t-2xl bg-muted">
           <IKImage
@@ -76,6 +78,7 @@ export function ProjectPreviewCard({ project, index = 0 }: ProjectPreviewCardPro
           <p className="text-sm text-muted-foreground">{project.description}</p>
         </CardContent>
       </Card>
+      </Link>
     </motion.div>
   );
 }

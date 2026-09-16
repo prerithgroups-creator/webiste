@@ -41,10 +41,16 @@ export type Project = {
   coverImage: string;
   /** Additional gallery images for the project detail page. */
   gallery: string[];
-  /** "Before" photo used in before/after comparison sections. */
-  beforeImage: string;
-  /** "After" photo used in before/after comparison sections. */
-  afterImage: string;
+  /**
+   * "Before" photo used in before/after comparison sections. Only
+   * meaningful (and only rendered) for "Renovation" category projects.
+   */
+  beforeImage?: string;
+  /**
+   * "After" photo used in before/after comparison sections. Only
+   * meaningful (and only rendered) for "Renovation" category projects.
+   */
+  afterImage?: string;
   /** Built-up area in square feet, if available. */
   sizeSqft?: number;
   /** Contract value as a display-ready string, e.g. "₹42 Cr". */

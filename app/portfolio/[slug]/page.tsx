@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import { ProjectFactsBar } from "@/components/portfolio/project-facts-bar";
 import { CompletionTimeline } from "@/components/portfolio/completion-timeline";
 import { BeforeAfterSlider } from "@/components/before-after-slider";
+import { PhotoCarousel } from "@/components/portfolio/photo-carousel";
 import { ProjectGallery } from "@/components/portfolio/project-gallery";
 import { MoreProjects } from "@/components/portfolio/more-projects";
 
@@ -171,24 +172,39 @@ export default async function ProjectDetailPage({
       </section>
 
       {/* ------------------------------------------------------------ */}
-      {/* 4. Before / after slider                                       */}
+      {/* 4. Before / after (renovations only) — other categories show a   */}
+      {/*    single main-photo carousel through the project's photos.      */}
       {/* ------------------------------------------------------------ */}
-      <section className="bg-secondary/40 px-6 py-20 sm:py-24">
-        <Container>
-          <SectionHeading
-            eyebrow="Transformation"
-            title="Before & After"
-            subtitle="Drag the divider to compare the site before construction and the finished result."
-          />
-          <div className="mt-10">
-            <BeforeAfterSlider
-              beforeImage={project.beforeImage}
-              afterImage={project.afterImage}
-              title={project.title}
+      {project.category === "Renovation" && project.beforeImage && project.afterImage ? (
+        <section className="bg-secondary/40 px-6 py-20 sm:py-24">
+          <Container>
+            <SectionHeading
+              eyebrow="Transformation"
+              title="Before & After"
+              subtitle="Drag the divider to compare the site before construction and the finished result."
             />
-          </div>
-        </Container>
-      </section>
+            <div className="mt-10">
+              <BeforeAfterSlider
+                beforeImage={project.beforeImage}
+                afterImage={project.afterImage}
+                title={project.title}
+              />
+            </div>
+          </Container>
+        </section>
+      ) : (
+        <section className="bg-secondary/40 px-6 py-20 sm:py-24">
+          <Container>
+            <SectionHeading eyebrow="Highlights" title="Project Photos" />
+            <div className="mt-10">
+              <PhotoCarousel
+                images={[project.coverImage, ...project.gallery]}
+                title={project.title}
+              />
+            </div>
+          </Container>
+        </section>
+      )}
 
       {/* ------------------------------------------------------------ */}
       {/* 5. Gallery grid + lightbox                                     */}

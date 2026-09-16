@@ -16,6 +16,13 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "*.imagekit.io",
       },
+      // Sanity's image CDN — used directly by components/ik-image.tsx's
+      // next/image fallback whenever NEXT_PUBLIC_IMAGEKIT_URL isn't set,
+      // since project images uploaded in Sanity Studio are served from here.
+      {
+        protocol: "https",
+        hostname: "cdn.sanity.io",
+      },
     ],
   },
 };
