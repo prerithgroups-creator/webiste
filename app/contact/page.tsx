@@ -32,8 +32,8 @@ const CONTACT_CARDS = [
   {
     icon: MapPin,
     label: "Visit Us",
-    value: `${BUSINESS.streetAddress}, ${BUSINESS.addressLocality}, ${BUSINESS.areaServed}`,
-    href: undefined,
+    value: `${BUSINESS.streetAddress}, ${BUSINESS.addressLocality} ${BUSINESS.postalCode}`,
+    href: BUSINESS.googleMapsUrl,
   },
 ];
 
@@ -77,10 +77,13 @@ export default function ContactPage() {
                 </>
               );
 
+              const isExternal = card.href?.startsWith("http");
+
               return card.href ? (
                 <a
                   key={card.label}
                   href={card.href}
+                  {...(isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                   className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-border transition-colors hover:bg-secondary"
                 >
                   {content}

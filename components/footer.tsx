@@ -16,7 +16,7 @@ const CONTACT = {
   phone: BUSINESS.telephoneDisplay,
   phoneHref: BUSINESS.telephone,
   email: BUSINESS.email,
-  address: `${BUSINESS.streetAddress}, ${BUSINESS.addressLocality}, ${BUSINESS.areaServed}`,
+  address: `${BUSINESS.streetAddress}, ${BUSINESS.addressLocality} ${BUSINESS.postalCode}`,
 };
 
 // TODO: replace "#" with real social profile URLs.

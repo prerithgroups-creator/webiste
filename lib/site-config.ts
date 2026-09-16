@@ -20,18 +20,22 @@ export const SITE_NAME = "Prerith Groups";
 export const SITE_DESCRIPTION =
   "Prerith Groups builds landmark residential, commercial, and renovation projects across India — delivered with precision and always on schedule.";
 
-// TODO: replace with real contact/social details once available (kept in
-// sync with components/footer.tsx).
+// Kept in sync with components/footer.tsx, components/whatsapp-button.tsx,
+// and app/contact/page.tsx — update contact details here only.
 export const BUSINESS = {
   legalName: "Prerith Groups",
-  telephone: "+91-98765-43210",
-  telephoneDisplay: "+91 98765 43210",
+  telephone: "+91-90086-20555",
+  telephoneDisplay: "+91 90086 20555",
   email: "hello@prerithgroups.com",
-  streetAddress: "12th Floor, Prestige Towers",
-  addressLocality: "Bengaluru",
+  streetAddress: "No.14, Sai Meadows Phase 2, Sarjapur Road",
+  addressLocality: "Bangalore",
   addressRegion: "Karnataka",
+  postalCode: "562125",
   addressCountry: "IN",
   areaServed: "India",
   logo: `${SITE_URL}/logo.png`,
+  // Google Maps link for the office address, used on the Contact page.
+  googleMapsUrl:
+    "https://www.google.com/maps/search/?api=1&query=Prerith+Groups+No+14+Sai+Meadows+Phase+2+Sarjapur+Road+Bangalore+562125",
   sameAs: [] as string[],
 };
