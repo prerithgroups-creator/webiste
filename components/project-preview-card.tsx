@@ -36,7 +36,7 @@ export function ProjectPreviewCard({ project, index = 0 }: ProjectPreviewCardPro
       transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
     >
       <Link href={`/portfolio/${project.slug}`} className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 rounded-2xl">
-      <Card className="rounded-2xl border-none shadow-md shadow-primary/5 ring-1 ring-border transition-shadow hover:shadow-lg hover:shadow-primary/10">
+      <Card className="rounded-2xl border-none pt-0! shadow-md shadow-primary/5 ring-1 ring-border transition-shadow hover:shadow-lg hover:shadow-primary/10">
         <div className="relative aspect-[4/3] w-full overflow-hidden rounded-t-2xl bg-muted">
           <IKImage
             src={project.coverImage}

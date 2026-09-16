@@ -1,9 +1,7 @@
 import Link from "next/link";
-import { CheckCircle2, Loader2, MapPin } from "lucide-react";
-import { cn } from "cn";
+import { MapPin } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { IKImage } from "@/components/ik-image";
-import { formatProjectDuration } from "@/lib/utils";
 import type { Project } from "@/lib/types";
 
 type PortfolioProjectCardProps = {
@@ -11,21 +9,13 @@ type PortfolioProjectCardProps = {
 };
 
 /**
- * Portfolio-listing card: cover image, category tag, title, location, and a
- * duration/progress badge. Links through to the (future) project detail
- * page at /portfolio/[slug].
+ * Portfolio-listing card: cover image, category tag, title, and location.
+ * Links through to the project detail page at /portfolio/[slug].
  *
  * Image delivery is handled by the shared `IKImage` component (ImageKit
  * with a next/image fallback) — see components/ik-image.tsx.
  */
 export function PortfolioProjectCard({ project }: PortfolioProjectCardProps) {
-  const isOngoing = project.status === "Ongoing";
-  const durationLabel = isOngoing
-    ? `Ongoing${
-        typeof project.progressPercent === "number" ? ` · ${project.progressPercent}%` : ""
-      }`
-    : formatProjectDuration(project.startDate, project.completionDate);
-
   return (
     <Link
       href={`/portfolio/${project.slug}`}
@@ -39,17 +29,6 @@ export function PortfolioProjectCard({ project }: PortfolioProjectCardProps) {
           sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
           className="object-cover transition-transform duration-500 group-hover:scale-105"
         />
-        <Badge
-          className={cn(
-            "absolute left-3 top-3 gap-1",
-            isOngoing
-              ? "bg-accent text-accent-foreground"
-              : "bg-white/95 text-emerald-700 ring-1 ring-emerald-600/15"
-          )}
-        >
-          {isOngoing ? <Loader2 className="size-3 animate-spin" /> : <CheckCircle2 className="size-3" />}
-          {durationLabel}
-        </Badge>
         <Badge variant="secondary" className="absolute right-3 top-3">
           {project.category}
         </Badge>
