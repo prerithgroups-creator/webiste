@@ -32,7 +32,12 @@ const client: SanityClient | null = isSanityConfigured
       // Read-only, published content only — no token needed for this. If
       // you later want to preview drafts, add a read token here via
       // `token: process.env.SANITY_API_TOKEN` and `perspective: "previewDrafts"`.
-      useCdn: true,
+      //
+      // useCdn is false so newly-published documents show up immediately.
+      // Sanity's CDN (useCdn: true) is fast but eventually-consistent —
+      // combined with Next's `revalidate = 60`, a freshly published project
+      // could otherwise take several minutes to appear on the live site.
+      useCdn: false,
     })
   : null;
 
