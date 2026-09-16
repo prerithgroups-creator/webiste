@@ -2,8 +2,6 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { CheckCircle2, Loader2 } from "lucide-react";
-import { cn } from "cn";
 import { IKImage } from "@/components/ik-image";
 import {
   Card,
@@ -12,8 +10,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { formatProjectDuration } from "@/lib/utils";
 import type { Project } from "@/lib/types";
 
 type ProjectPreviewCardProps = {
@@ -32,13 +28,6 @@ type ProjectPreviewCardProps = {
  * with a next/image fallback) — see components/ik-image.tsx.
  */
 export function ProjectPreviewCard({ project, index = 0 }: ProjectPreviewCardProps) {
-  const isOngoing = project.status === "Ongoing";
-  const badgeLabel = isOngoing
-    ? `In progress${
-        typeof project.progressPercent === "number" ? ` · ${project.progressPercent}%` : ""
-      }`
-    : formatProjectDuration(project.startDate, project.completionDate);
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 24 }}
@@ -56,17 +45,6 @@ export function ProjectPreviewCard({ project, index = 0 }: ProjectPreviewCardPro
             sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
             className="object-cover"
           />
-          <Badge
-            className={cn(
-              "absolute left-3 top-3 gap-1",
-              isOngoing
-                ? "bg-accent text-accent-foreground"
-                : "bg-white/95 text-emerald-700 ring-1 ring-emerald-600/15"
-            )}
-          >
-            {isOngoing ? <Loader2 className="size-3 animate-spin" /> : <CheckCircle2 className="size-3" />}
-            {badgeLabel}
-          </Badge>
         </div>
         <CardHeader>
           <CardTitle className="text-lg">{project.title}</CardTitle>
