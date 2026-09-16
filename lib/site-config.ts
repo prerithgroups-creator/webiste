@@ -26,7 +26,7 @@ export const BUSINESS = {
   legalName: "Prerith Groups",
   telephone: "+91-90086-20555",
   telephoneDisplay: "+91 90086 20555",
-  email: "hello@prerithgroups.com",
+  email: "prerith.groups@gmail.com",
   streetAddress: "No.14, Sai Meadows Phase 2, Sarjapur Road",
   addressLocality: "Bangalore",
   addressRegion: "Karnataka",
