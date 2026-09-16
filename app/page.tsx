@@ -7,6 +7,11 @@ import { IKImage } from "@/components/ik-image";
 import { ProjectPreviewCard } from "@/components/project-preview-card";
 import { getProjects } from "@/lib/sanity";
 
+// Re-fetch from Sanity at most once per minute instead of caching the
+// build-time result forever, so newly published/edited projects show up
+// without needing a full redeploy.
+export const revalidate = 60;
+
 export default async function Home() {
   const projects = await getProjects();
 

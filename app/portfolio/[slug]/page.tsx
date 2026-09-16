@@ -16,6 +16,11 @@ import { BeforeAfterSlider } from "@/components/before-after-slider";
 import { ProjectGallery } from "@/components/portfolio/project-gallery";
 import { MoreProjects } from "@/components/portfolio/more-projects";
 
+// Re-fetch from Sanity at most once per minute instead of caching the
+// build-time result forever, so newly published/edited projects (and new
+// slugs not present at build time) show up without needing a full redeploy.
+export const revalidate = 60;
+
 export async function generateStaticParams() {
   const projects = await getProjects();
   return projects.map((project) => ({ slug: project.slug }));

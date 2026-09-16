@@ -3,6 +3,11 @@ import { getProjects } from "@/lib/sanity";
 import { Container } from "@/components/ui/container";
 import { PortfolioBrowser } from "@/components/portfolio-browser";
 
+// Re-fetch from Sanity at most once per minute instead of caching the
+// build-time result forever, so newly published/edited projects show up
+// without needing a full redeploy.
+export const revalidate = 60;
+
 const TITLE = "Our Projects";
 const DESCRIPTION =
   "Browse the Prerith Groups portfolio of residential, commercial, and renovation projects across India.";
