@@ -8,6 +8,7 @@ import {
   FacebookIcon,
   InstagramIcon,
   LinkedinIcon,
+  YoutubeIcon,
 } from "@/components/icons/social-icons";
 
 // Derived from the shared BUSINESS config (lib/site-config.ts) so contact
@@ -19,11 +20,11 @@ const CONTACT = {
   address: `${BUSINESS.streetAddress}, ${BUSINESS.addressLocality} ${BUSINESS.postalCode}`,
 };
 
-// TODO: replace "#" with real social profile URLs.
 const SOCIAL_LINKS = [
-  { label: "Facebook", href: "#", icon: FacebookIcon },
-  { label: "Instagram", href: "#", icon: InstagramIcon },
-  { label: "LinkedIn", href: "#", icon: LinkedinIcon },
+  { label: "Facebook", href: "https://www.facebook.com/profile.php?id=61593926266975", icon: FacebookIcon },
+  { label: "Instagram", href: "https://www.instagram.com/prerithgroups", icon: InstagramIcon },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/prerith-groups-126252436", icon: LinkedinIcon },
+  { label: "YouTube", href: "https://youtube.com/@prerithgroups", icon: YoutubeIcon },
 ];
 
 export function Footer() {
@@ -100,6 +101,8 @@ export function Footer() {
               <a
                 key={social.label}
                 href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label={social.label}
                 className="inline-flex size-9 items-center justify-center rounded-full bg-white/5 transition-colors hover:bg-accent hover:text-accent-foreground"
               >

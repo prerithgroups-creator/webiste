@@ -37,5 +37,10 @@ export const BUSINESS = {
   // Google Maps link for the office address, used on the Contact page.
   googleMapsUrl:
     "https://www.google.com/maps/search/?api=1&query=Prerith+Groups+No+14+Sai+Meadows+Phase+2+Sarjapur+Road+Bangalore+562125",
-  sameAs: [] as string[],
+  sameAs: [
+    "https://www.facebook.com/profile.php?id=61593926266975",
+    "https://www.instagram.com/prerithgroups",
+    "https://www.linkedin.com/in/prerith-groups-126252436",
+    "https://youtube.com/@prerithgroups",
+  ] as string[],
 };
