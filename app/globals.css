@@ -56,7 +56,7 @@
   --card-foreground: #1f2937;
   --popover: #ffffff;
   --popover-foreground: #1f2937;
-  --primary: #1f2937; /* deep charcoal - strong backgrounds, headings */
+  --primary: #1f3a5f; /* deep navy - strong backgrounds, headings (avoid pure black) */
   --primary-foreground: #ffffff;
   --secondary: #f3f4f6; /* alt section background */
   --secondary-foreground: #1f2937;

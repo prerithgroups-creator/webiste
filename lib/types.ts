@@ -30,6 +30,10 @@ export type Project = {
   description: string;
   /** Optional quote from the client, shown on the project detail page. */
   clientTestimonial?: string;
+  /** Optional YouTube link for a video version of the client testimonial. */
+  testimonialVideoUrl?: string;
+  /** Optional YouTube link showcasing the project (walkthrough, drone footage, etc). */
+  videoUrl?: string;
   /** ISO date string — when construction began. */
   startDate: string;
   /**
@@ -58,4 +62,17 @@ export type Project = {
   status: ProjectStatus;
   /** Only meaningful when `status` is "Ongoing". 0-100. */
   progressPercent?: number;
+};
+
+/** A person on the About page's team grid. */
+export type TeamMember = {
+  /** Stable unique identifier (e.g. a Sanity document `_id` later on). */
+  id: string;
+  name: string;
+  /** Job title / position, e.g. "Site Engineer". */
+  role: string;
+  /** Display-ready experience label, e.g. "12 years". */
+  experience: string;
+  /** Optional headshot photo URL. */
+  photo?: string;
 };

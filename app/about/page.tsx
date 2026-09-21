@@ -1,10 +1,14 @@
 import type { Metadata } from "next";
 import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { IKImage } from "@/components/ik-image";
+import { getTeamMembers } from "@/lib/sanity";
 
 const TITLE = "About Us";
 const DESCRIPTION =
   "Prerith Groups is a construction and development company delivering landmark residential, commercial, and renovation projects across India.";
+
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -20,7 +24,9 @@ const STATS = [
   { label: "Cities Served", value: "8" },
 ];
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const team = await getTeamMembers();
+
   return (
     <div className="flex flex-1 flex-col">
       <section className="bg-primary px-6 py-20 text-primary-foreground sm:py-24">
@@ -60,6 +66,44 @@ export default function AboutPage() {
           </div>
         </Container>
       </section>
+
+      {team.length > 0 ? (
+        <section className="bg-secondary px-6 py-16 sm:py-20">
+          <Container>
+            <SectionHeading
+              eyebrow="Our Team"
+              title="The people behind every project"
+              subtitle="Experienced leaders across architecture, engineering, and project management."
+            />
+
+            <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {team.map((member) => (
+                <div
+                  key={member.id}
+                  className="rounded-2xl bg-white p-6 text-center shadow-sm ring-1 ring-border"
+                >
+                  <div className="relative mx-auto size-24 overflow-hidden rounded-full bg-muted">
+                    {member.photo ? (
+                      <IKImage
+                        src={member.photo}
+                        alt={member.name}
+                        fill
+                        sizes="96px"
+                        className="object-cover"
+                      />
+                    ) : null}
+                  </div>
+                  <p className="mt-4 font-heading text-lg font-semibold text-foreground">
+                    {member.name}
+                  </p>
+                  <p className="mt-1 text-sm font-medium text-accent">{member.role}</p>
+                  <p className="mt-1 text-sm text-muted-foreground">{member.experience} experience</p>
+                </div>
+              ))}
+            </div>
+          </Container>
+        </section>
+      ) : null}
     </div>
   );
 }

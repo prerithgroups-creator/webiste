@@ -66,6 +66,18 @@ export const projectType = defineType({
       rows: 3,
     }),
     defineField({
+      name: "testimonialVideoUrl",
+      title: "Testimonial Video (YouTube URL)",
+      description: "Optional YouTube link for a video version of the client testimonial.",
+      type: "url",
+    }),
+    defineField({
+      name: "videoUrl",
+      title: "Project Showcase Video (YouTube URL)",
+      description: "Optional YouTube link (walkthrough, drone footage, etc) shown on the project detail page.",
+      type: "url",
+    }),
+    defineField({
       name: "startDate",
       title: "Start Date",
       type: "date",

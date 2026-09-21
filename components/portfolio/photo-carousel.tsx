@@ -27,14 +27,14 @@ export function PhotoCarousel({ images, title }: PhotoCarouselProps) {
 
   return (
     <div className="relative">
-      <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl bg-muted sm:aspect-[16/9]">
+      <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl bg-secondary sm:aspect-[16/9]">
         <IKImage
           key={images[index]}
           src={images[index]}
           alt={`${title} — photo ${index + 1}`}
           fill
           sizes="100vw"
-          className="object-cover"
+          className="object-contain"
         />
 
         {images.length > 1 ? (

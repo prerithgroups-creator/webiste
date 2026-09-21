@@ -34,26 +34,32 @@ export function ProjectPreviewCard({ project, index = 0 }: ProjectPreviewCardPro
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
+      className="h-full"
     >
-      <Link href={`/portfolio/${project.slug}`} className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 rounded-2xl">
-      <Card className="rounded-2xl border-none pt-0! shadow-md shadow-primary/5 ring-1 ring-border transition-shadow hover:shadow-lg hover:shadow-primary/10">
-        <div className="relative aspect-[4/3] w-full overflow-hidden rounded-t-2xl bg-muted">
+      <Link
+        href={`/portfolio/${project.slug}`}
+        className="block h-full rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+      >
+      <Card className="h-full flex-col rounded-2xl border-none pt-0! shadow-md shadow-primary/5 ring-1 ring-border transition-shadow hover:shadow-lg hover:shadow-primary/10">
+        <div className="relative aspect-[4/3] w-full overflow-hidden rounded-t-2xl bg-secondary">
           <IKImage
             src={project.coverImage}
             alt={project.title}
             fill
             sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-            className="object-cover"
+            className="object-contain"
           />
         </div>
         <CardHeader>
-          <CardTitle className="text-lg">{project.title}</CardTitle>
-          <CardDescription>
+          <CardTitle className="line-clamp-2 min-h-14 text-lg">{project.title}</CardTitle>
+          <CardDescription className="line-clamp-1">
             {project.category} · {project.location}
           </CardDescription>
         </CardHeader>
-        <CardContent>
-          <p className="text-sm text-muted-foreground">{project.description}</p>
+        <CardContent className="flex flex-1 flex-col">
+          <p className="line-clamp-2 min-h-10 text-sm text-muted-foreground">
+            {project.description}
+          </p>
         </CardContent>
       </Card>
       </Link>

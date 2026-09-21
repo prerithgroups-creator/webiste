@@ -21,13 +21,13 @@ export function PortfolioProjectCard({ project }: PortfolioProjectCardProps) {
       href={`/portfolio/${project.slug}`}
       className="group block h-full overflow-hidden rounded-2xl bg-white shadow-md shadow-primary/5 ring-1 ring-border transition-shadow hover:shadow-lg hover:shadow-primary/10"
     >
-      <div className="relative aspect-[4/3] w-full overflow-hidden bg-muted">
+      <div className="relative aspect-[4/3] w-full overflow-hidden bg-secondary">
         <IKImage
           src={project.coverImage}
           alt={project.title}
           fill
           sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-          className="object-cover transition-transform duration-500 group-hover:scale-105"
+          className="object-contain transition-transform duration-500 group-hover:scale-105"
         />
         <Badge variant="secondary" className="absolute right-3 top-3">
           {project.category}

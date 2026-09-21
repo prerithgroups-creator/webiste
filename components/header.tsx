@@ -78,10 +78,10 @@ export function Header() {
               <Image
                 src="/logo.png"
                 alt="Prerith Groups"
-                width={160}
-                height={48}
+                width={200}
+                height={60}
                 priority
-                className="h-9 w-auto sm:h-10"
+                className="h-12 w-auto sm:h-14"
               />
             </Link>
 
@@ -179,10 +179,7 @@ export function Header() {
               aria-modal="true"
               aria-label="Site navigation"
             >
-              <div className="flex items-center justify-between">
-                <span className="flex items-center">
-                  <Image src="/logo.png" alt="Prerith Groups" width={140} height={42} className="h-8 w-auto" />
-                </span>
+              <div className="flex items-center justify-end">
                 <button
                   type="button"
                   aria-label="Close menu"

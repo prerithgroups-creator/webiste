@@ -30,6 +30,8 @@ export const projects: Project[] = [
       "A 28-storey glass-façade office tower delivered ahead of schedule with a fast-track structural steel program and a fully integrated smart-building management system.",
     clientTestimonial:
       "Prerith Groups delivered our flagship tower three weeks early without compromising on finish quality. Exceptional project management from day one.",
+    testimonialVideoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
     startDate: "2022-02-01",
     completionDate: "2023-04-15",
     coverImage: "https://picsum.photos/seed/skyline-corporate-tower/1200/800",

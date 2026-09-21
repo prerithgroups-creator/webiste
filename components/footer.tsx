@@ -36,7 +36,7 @@ export function Footer() {
           {/* Company blurb */}
           <div className="max-w-sm">
             <span className="flex items-center">
-              <Image src="/logo-white.png" alt="Prerith Groups" width={160} height={48} className="h-9 w-auto" />
+              <Image src="/logo-white.png" alt="Prerith Groups" width={200} height={60} className="h-12 w-auto" />
             </span>
             <p className="mt-4 text-sm leading-6 text-primary-foreground/70">
               Prerith Groups delivers landmark commercial, residential, and

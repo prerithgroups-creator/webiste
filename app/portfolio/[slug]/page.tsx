@@ -16,6 +16,8 @@ import { BeforeAfterSlider } from "@/components/before-after-slider";
 import { PhotoCarousel } from "@/components/portfolio/photo-carousel";
 import { ProjectGallery } from "@/components/portfolio/project-gallery";
 import { MoreProjects } from "@/components/portfolio/more-projects";
+import { YoutubeEmbed } from "@/components/youtube-embed";
+import { getYouTubeEmbedUrl } from "@/lib/utils";
 
 // Re-fetch from Sanity at most once per minute instead of caching the
 // build-time result forever, so newly published/edited projects (and new
@@ -219,15 +221,44 @@ export default async function ProjectDetailPage({
       </section>
 
       {/* ------------------------------------------------------------ */}
+      {/* 5b. Project showcase video (optional, YouTube link)            */}
+      {/* ------------------------------------------------------------ */}
+      {getYouTubeEmbedUrl(project.videoUrl) ? (
+        <section className="bg-secondary/40 px-6 py-20 sm:py-24">
+          <Container>
+            <SectionHeading eyebrow="Watch" title="Project Showcase Video" />
+            <div className="mt-10 mx-auto max-w-3xl">
+              <YoutubeEmbed url={project.videoUrl} title={`${project.title} showcase video`} />
+            </div>
+          </Container>
+        </section>
+      ) : null}
+
+      {/* ------------------------------------------------------------ */}
       {/* 6. Testimonial + CTA band                                      */}
       {/* ------------------------------------------------------------ */}
-      {project.clientTestimonial ? (
+      {project.clientTestimonial || getYouTubeEmbedUrl(project.testimonialVideoUrl) ? (
         <section className="bg-primary px-6 py-20 text-primary-foreground sm:py-24">
           <Container className="max-w-3xl text-center">
-            <Quote className="mx-auto size-10 text-accent" />
-            <p className="mt-6 font-heading text-2xl leading-snug font-medium sm:text-3xl">
-              &ldquo;{project.clientTestimonial}&rdquo;
+            <p className="text-sm font-semibold uppercase tracking-wider text-accent">
+              Testimonials
             </p>
+            {getYouTubeEmbedUrl(project.testimonialVideoUrl) ? (
+              <div className="mt-6">
+                <YoutubeEmbed
+                  url={project.testimonialVideoUrl}
+                  title={`${project.title} client testimonial`}
+                />
+              </div>
+            ) : null}
+            {project.clientTestimonial ? (
+              <>
+                <Quote className="mx-auto mt-6 size-10 text-accent" />
+                <p className="mt-6 font-heading text-2xl leading-snug font-medium sm:text-3xl">
+                  &ldquo;{project.clientTestimonial}&rdquo;
+                </p>
+              </>
+            ) : null}
             <p className="mt-6 text-sm font-semibold tracking-wider text-primary-foreground/70 uppercase">
               — Client, {project.title}
             </p>

@@ -18,11 +18,12 @@ import { createClient, type SanityClient } from "@sanity/client";
 import imageUrlBuilder from "@sanity/image-url";
 import type { Image } from "sanity";
 import { apiVersion, dataset, isSanityConfigured, projectId } from "@/sanity/env";
-import type { Project } from "@/lib/types";
+import type { Project, TeamMember } from "@/lib/types";
 import {
   getProjectBySlug as getMockProjectBySlug,
   getProjects as getMockProjects,
 } from "@/data/projects";
+import { getTeamMembers as getMockTeamMembers } from "@/data/team";
 
 const client: SanityClient | null = isSanityConfigured
   ? createClient({
@@ -59,6 +60,8 @@ type SanityProject = {
   year: number;
   description: string;
   clientTestimonial?: string;
+  testimonialVideoUrl?: string;
+  videoUrl?: string;
   startDate: string;
   completionDate: string;
   coverImage: Image;
@@ -81,6 +84,8 @@ function toProject(doc: SanityProject): Project {
     year: doc.year,
     description: doc.description,
     clientTestimonial: doc.clientTestimonial,
+    testimonialVideoUrl: doc.testimonialVideoUrl,
+    videoUrl: doc.videoUrl,
     startDate: doc.startDate,
     completionDate: doc.completionDate,
     coverImage: urlFor(doc.coverImage),
@@ -103,6 +108,8 @@ const PROJECT_FIELDS = `
   year,
   description,
   clientTestimonial,
+  testimonialVideoUrl,
+  videoUrl,
   startDate,
   completionDate,
   coverImage,
@@ -132,4 +139,32 @@ export async function getProjectBySlug(slug: string): Promise<Project | undefine
     { slug }
   );
   return doc ? toProject(doc) : undefined;
+}
+
+// Raw shape of a "teamMember" document as it comes back from Sanity.
+type SanityTeamMember = {
+  _id: string;
+  name: string;
+  role: string;
+  experience: string;
+  photo?: Image;
+};
+
+function toTeamMember(doc: SanityTeamMember): TeamMember {
+  return {
+    id: doc._id,
+    name: doc.name,
+    role: doc.role,
+    experience: doc.experience,
+    photo: doc.photo ? urlFor(doc.photo) : undefined,
+  };
+}
+
+export async function getTeamMembers(): Promise<TeamMember[]> {
+  if (!client) return getMockTeamMembers();
+
+  const docs = await client.fetch<SanityTeamMember[]>(
+    `*[_type == "teamMember"] | order(order asc) { _id, name, role, experience, photo }`
+  );
+  return docs.map(toTeamMember);
 }
