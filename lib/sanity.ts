@@ -46,7 +46,15 @@ const builder = client ? imageUrlBuilder(client) : null;
 
 function urlFor(source: Image | undefined): string {
   if (!source || !builder) return "";
-  return builder.image(source).url();
+  // Guard against incomplete image fields (e.g. an upload never attached in
+  // Studio) — asset-less images throw inside @sanity/image-url, which would
+  // otherwise crash the whole document.
+  if (!source.asset) return "";
+  try {
+    return builder.image(source).url();
+  } catch {
+    return "";
+  }
 }
 
 // Raw shape of a "project" document as it comes back from Sanity (images
@@ -89,7 +97,7 @@ function toProject(doc: SanityProject): Project {
     startDate: doc.startDate,
     completionDate: doc.completionDate,
     coverImage: urlFor(doc.coverImage),
-    gallery: (doc.gallery ?? []).map((image) => urlFor(image)),
+    gallery: (doc.gallery ?? []).map((image) => urlFor(image)).filter(Boolean),
     beforeImage: doc.beforeImage ? urlFor(doc.beforeImage) : undefined,
     afterImage: doc.afterImage ? urlFor(doc.afterImage) : undefined,
     sizeSqft: doc.sizeSqft,
